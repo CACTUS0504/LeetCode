@@ -4,22 +4,22 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Solution {
-    public static int helper(int curr, Map<Integer, Integer> checked) {
-        if (curr == 0 || curr == 1) {
-            return 1;
+    public static void moveZeroes(int[] nums) {
+        int j = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != 0) {
+                nums[j] = nums[i];
+                j++;
+            }
         }
-        if (!checked.containsKey(curr)) {
-            checked.put(curr, helper(curr - 1, checked) + helper(curr - 2, checked));
+        while (j < nums.length) {
+            nums[j] = 0;
+            j++;
         }
-        return checked.get(curr);
     }
-
-    public static int climbStairs(int n) {
-        Map<Integer, Integer> checked = new HashMap<>();
-        return helper(n, checked);
-    }
-
     public static void main(String[] args) {
-        System.out.println(climbStairs(3));
+        int[] nums = {0, 1, 0, 3, 12};
+        moveZeroes(nums);
+        for (int num : nums) System.out.println(num);
     }
 }
